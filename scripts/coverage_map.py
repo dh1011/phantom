@@ -41,16 +41,7 @@ def render(data: dict, top: int) -> str:
     files = data["files"]
     rows = []
     for path, info in files.items():
-        summary = info["summary"]
-        rows.append(
-            (
-                summary["percent_covered"],
-                path,
-                summary["num_statements"],
-                summary["missing_lines"],
-                summary["excluded_lines"],
-            )
-        )
+        rows.append((info["summary"]["percent_covered"], path, info["missing_lines"]))
     rows.sort()
     total = data["totals"]
     out = [
@@ -64,7 +55,7 @@ def render(data: dict, top: int) -> str:
         "| File | Cover | Miss | Missing lines |",
         "| :--- | ---: | ---: | :--- |",
     ]
-    for percent, path, _stmts, missing, _excluded in rows[:top]:
+    for percent, path, missing in rows[:top]:
         out.append(
             f"| `{path}` | {percent:.1f}% | {len(missing)} | {compress(missing)} |"
         )

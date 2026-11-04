@@ -10,6 +10,8 @@ All notable changes to Phantom are documented here. The format follows [Keep a C
 - PowerShell tab completion script (`scripts/completions/phantom.ps1`) for subcommands and flags (#184).
 
 ### Fixed
+- The lexer falls back to scanning lines when Python's tokenizer raises a Unicode decoding error (#237).
+- `phantom run` preserves Windows line endings in host output without adding blank lines (#238).
 - `phantom check` omits the empty diagnostic summary when a file fails to load (#224).
 - Validator no longer cascades spurious "before it is created" errors when `counter.create` has an invalid limit (#182).
 - `SourceMap` no longer overwrites default line mappings with file-scoped mappings in multi-file source maps (#172).

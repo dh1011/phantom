@@ -221,17 +221,17 @@ def execute_host_program(
         for reader in readers:
             reader.start()
 
-        def _feed_stdin() -> None:
+        def _feed_stdin(text: str) -> None:
             try:
                 assert proc.stdin is not None
-                proc.stdin.write(stdin_text.encode("utf-8"))
+                proc.stdin.write(text.encode("utf-8"))
                 proc.stdin.close()
             except (BrokenPipeError, OSError, ValueError):
                 pass
 
         stdin_thread = None
         if stdin_text is not None:
-            stdin_thread = threading.Thread(target=_feed_stdin, daemon=True)
+            stdin_thread = threading.Thread(target=_feed_stdin, args=(stdin_text,), daemon=True)
             stdin_thread.start()
         timed_out = False
         try:
