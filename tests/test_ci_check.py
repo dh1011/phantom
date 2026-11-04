@@ -100,24 +100,26 @@ def test_coverage_map_sorts_lowest_first(tmp_path):
                 "files": {
                     "src/phantom/a.py": {
                         "summary": {
-                            "percent_covered": 50.0,
+                            "percent_covered": 60.0,
                             "num_statements": 10,
-                            "missing_lines": [1, 2, 3, 5],
-                            "excluded_lines": [],
-                        }
+                            "missing_lines": 4,
+                            "excluded_lines": 0,
+                        },
+                        "missing_lines": [1, 2, 3, 5],
                     },
                     "src/phantom/b.py": {
                         "summary": {
                             "percent_covered": 100.0,
                             "num_statements": 4,
-                            "missing_lines": [],
-                            "excluded_lines": [],
-                        }
+                            "missing_lines": 0,
+                            "excluded_lines": 0,
+                        },
+                        "missing_lines": [],
                     },
                 },
                 "totals": {
-                    "percent_covered": 75.0,
-                    "covered_lines": 12,
+                    "percent_covered": 100.0 * 10 / 14,
+                    "covered_lines": 10,
                     "num_statements": 14,
                 },
             }
